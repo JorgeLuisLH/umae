@@ -1,0 +1,31 @@
+<div>
+  <h4>{{title}}</h4>
+
+  
+<div class="card border-primary mb-3 " style="max-width: 40rem;">
+    <div class="card-header">{{carrusel.cuenta_habiente._id}}</div>
+    <div class="card-body text-primary">
+      <h4 class="card-title">{{carrusel.cuenta_habiente.nombre}} {{carrusel.cuenta_habiente.paterno}} {{carrusel.cuenta_habiente.materno}}</h4>
+      <p class="card-text">Genero: {{carrusel.cuenta_habiente.genero}} </p>
+      <p class="card-text">Fecha de Nacimiento:{{carrusel.cuenta_habiente.f_nacimiento | date:'medium'}}</p>
+      <p class="card-text">Curp:{{carrusel.cuenta_habiente.curp}}</p>
+    </div>
+  </div>
+
+
+  <div class="card border-info mb-3" style="max-width: 40rem;">
+      <div class="card-header">Carrusel</div>
+      <div class="card-body text-info">
+        <h4 class="card-title">{{carrusel.estatus_carrusel}}</h4>
+        <p class="card-text">Fecha de ingreso: {{carrusel.f_ingreso | date:'medium'}} </p>
+        <p class="card-text">Diagnostico: {{carrusel.diagnostico}}</p>
+        <p class="card-text">Completado: {{carrusel.completo}}</p>
+        <p class="card-text">Fecha del Estatus:{{carrusel.f_estatus | date:'medium'}}</p>
+        <p class="card-text">Cama: {{carrusel.cama}}</p>
+        <p class="card-text">Anotaciones: {{carrusel.anotaciones}}</p>
+        <p class="card-text">Servicio: {{carrusel.servicio}}</p>
+        <p class="card-text">Fecha de egreso: {{carrusel.f_egreso | date:'medium'}}</p>
+      </div>
+    </div>
+
+</div>

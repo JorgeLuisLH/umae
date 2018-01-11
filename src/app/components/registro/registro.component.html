@@ -1,0 +1,72 @@
+<div class="col-lg-6">
+    <h1>{{title}}</h1>
+    <div class="alert alert-success" *ngIf="status == 'success'">
+      Registro Completado correctamente, <a [routerLink]="['/login']"> Identificate aqui</a>
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'error'">
+      No te has registrado correctamente
+    </div>
+
+<form (ngSubmit)="registro(forma)" #forma="ngForm">
+  <div class="row">
+    <div class="col-md-6 mb-3">
+        <label>Matricula</label>
+        <input [(ngModel)]="usuario._id" name="_id" #_id="ngModel" type="text" class="form-control"  placeholder="Matricula"  required>
+        <div class="alert alert-warning" *ngIf="!_id.valid && _id.touched" >
+            la Matricula es Obligatoria
+        </div>
+      </div>
+    <div class="col-md-6 mb-3">
+      <label >Nombre</label>
+      <input [(ngModel)]="usuario.nombre" #nombre="ngModel" name="nombre" type="text" class="form-control " placeholder="Nombre"  required>
+      <div class="alert alert-warning" *ngIf="!nombre.valid && nombre.touched" >
+          El nombre es obligatorio
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label>Apellido Paterno</label>
+      <input [(ngModel)]="usuario.paterno" #paterno="ngModel" name="paterno" type="text" class="form-control " placeholder="Apellido Paterno"  required>
+      <div class="alert alert-warning" *ngIf="!paterno.valid && paterno.touched" >
+          Es obligatorio
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label >Apellido Materno</label>
+      <input [(ngModel)]="usuario.materno" #materno="ngModel" name="materno" type="text" class="form-control "  placeholder="Apllido Materno" required>
+      <div class="alert alert-warning" *ngIf="!materno.valid && materno.touched" >
+          Es obligatorio
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label >Correo</label>
+      <input  [(ngModel)]="usuario.email" #email="ngModel" name="email"type="text" class="form-control "  placeholder="Correo" required>
+      <div class="alert alert-warning" *ngIf="!email.valid && email.touched" >
+          Es obligatorio
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label>Categoria</label>
+      <input  [(ngModel)]="usuario.categoria" name="categoria"type="text" class="form-control "  placeholder="Categoria" required>
+      <div class="invalid-feedback">
+        Please provide a valid zip.
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label>Perfil</label>
+      <input [(ngModel)]="usuario.perfil" name="perfil" type="text" class="form-control "  placeholder="Perfil" required>
+      <div class="invalid-feedback">
+        Please provide a valid zip.
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label>Password</label>
+      <input [(ngModel)]="usuario.password" #password="ngModel" name="password" type="password" class="form-control "  placeholder="Password" required>
+      <div class="alert alert-warning" *ngIf="!password.valid && password.touched" >
+          Es obligatorio
+      </div>
+    </div>
+  </div>
+  
+
+  <button  [disabled]="!forma.valid" class="btn btn-outline-primary btn-block" type="submit">Registrar</button>
+</form>

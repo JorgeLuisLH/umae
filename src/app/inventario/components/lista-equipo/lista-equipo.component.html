@@ -1,0 +1,44 @@
+<div class="col-lg-12">
+    <h3>{{title}}</h3>
+  
+   
+    <div class="row">
+    <div class="col-6 col-md-4" *ngFor="let equipo of equipos ">
+         <div class="card text-white bg-primary mb-2" style="max-width: 21rem;">
+            <a href="#verModal-{{equipo._id}}" class="card-header text-white" data-toggle="modal" >{{equipo._id}}</a>
+            <div class="card-body">
+              <h4 class="card-title">{{equipo.alias}}</h4>
+                <a  href="#myModal-{{equipo._id}}" role="button" data-toggle="modal" class="btn btn-sm btn-danger">
+                  <span class="glyphicon glyphicon-trash"></span>
+                  Borrar
+                </a>  
+                <a [routerLink]="['/addconfiguracion', equipo._id]" class="btn btn-sm btn-success">
+                  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                  Configuracion
+                </a>
+            </div>
+          </div>
+        
+
+          <!-- Modal Detalles del equipo-->
+<div class="modal fade" id="verModal-{{equipo._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{equipo._id}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{equipo.alias}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a [routerLink]="['/equipo/editar', equipo._id]" class="btn btn-primary" data-dismiss="modal">
+          Editar
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

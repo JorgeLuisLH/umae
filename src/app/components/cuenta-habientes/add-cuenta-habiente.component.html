@@ -1,0 +1,67 @@
+<div class="col-lg-6">
+    <h1>{{title}}</h1>
+    <div class="alert alert-success" *ngIf="status == 'success'">
+      Cuenta Habiente agregado correctamente, <a [routerLink]="['/cuentahabiente']"> Ver aqui</a>
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'error'">
+      No se agrego correctamente
+    </div>
+    
+    <form (ngSubmit)="onSubmit(forma)" #forma="ngForm">
+    <div class="row">
+    <div class="col-md-6 mb-3">
+        <label>Numero de Seguro Social</label>
+        <input [(ngModel)]="cuenta_habiente._id" name="_id" #_id="ngModel" type="text" class="form-control"  placeholder="Numero de seguro social"  minlength="11" maxlength="11" required>
+        <div class="alert alert-warning" *ngIf="!_id.valid && _id.touched" >
+            El numero de seguro socual es obligatorio
+        </div>
+      </div>
+    <div class="col-md-6 mb-3">
+      <label >Nombre</label>
+      <input [(ngModel)]="cuenta_habiente.nombre" #nombre="ngModel" name="nombre" type="text" class="form-control " placeholder="Nombre"  required>
+      <div class="alert alert-warning" *ngIf="!nombre.valid && nombre.touched" >
+          El nombre es obligatorio
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label>Apellido Paterno</label>
+      <input [(ngModel)]="cuenta_habiente.paterno" #paterno="ngModel" name="paterno" type="text" class="form-control " placeholder="Apellido Paterno"  required>
+      <div class="alert alert-warning" *ngIf="!paterno.valid && paterno.touched" >
+          Es obligatorio
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label >Apellido Materno</label>
+      <input [(ngModel)]="cuenta_habiente.materno" #materno="ngModel" name="materno" type="text" class="form-control "  placeholder="Apllido Materno" required>
+      <div class="alert alert-warning" *ngIf="!materno.valid && materno.touched" >
+          Es obligatorio
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label >Genero</label>
+        <select class="form-control" [(ngModel)]= "cuenta_habiente.genero" #genero="ngModel"  name="genero" required>
+          <option value=”” disabled  selected>Seleccionar Genero</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Femenino">Femenino</option>
+        </select>
+        <div class="alert alert-warning" *ngIf="!genero.valid && genero.touched" >
+            Es obligatorio
+        </div>
+      </div>
+    <div class="col-md-6 mb-3">
+      <label>Fecha de Nacimento</label>
+      <input  [ngModel]="cuenta_habiente.f_nacimiento | date:'yyyy-MM-dd'" (ngModelChange)="cuenta_habiente.f_nacimiento = $event" #f_nacimiento="ngModel" name="f_nacimiento" type="date" class="form-control " value=""  placeholder="Fecha de nacimiento" required>
+      <div class="alert alert-warning" *ngIf="!f_nacimiento.valid && f_nacimiento.touched" >
+        Es obligatorio
+    </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label>Curp</label>
+      <input [(ngModel)]="cuenta_habiente.curp" name="curp" type="text" class="form-control "  placeholder="Curp">
+    </div>
+    
+    </div>
+    
+    
+    <input  [disabled]="!forma.valid" class="btn btn-outline-primary btn-block" type="submit" value="{{title}}"/>
+    </form>

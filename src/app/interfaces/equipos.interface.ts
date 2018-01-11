@@ -1,0 +1,21 @@
+export interface Equipo{
+    _id: String,
+    alias: String,
+    nni: String,
+    inventario: String,
+    tipo_equipo: String,
+    marca: String,
+    modelo: String,
+    piso: String,
+    ubicacion: String,
+    mac: String,
+    ip: String,
+    procesador: String,
+    dd: String,
+    ram: String,
+    observaciones: String,
+    activo: Boolean,
+    estatus: String,
+    fecha: Date,
+    usuario: String
+}

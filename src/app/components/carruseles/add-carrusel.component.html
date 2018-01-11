@@ -1,0 +1,95 @@
+<div>
+        <h4>{{title}}</h4>
+
+        <div class="card border-primary mb-3 " style="max-width: 40rem;">
+            <div class="card-header">Numero de Seguro Social: {{cuenta_habiente._id || carrusel.cuenta_habiente._id}}</div>
+            <div class="card-body text-primary">
+              <h4 class="card-title">{{cuenta_habiente.nombre}} {{cuenta_habiente.paterno}} {{cuenta_habiente.materno 
+                || carrusel.cuenta_habiente.nombre}} {{carrusel.cuenta_habiente.paterno}} {{carrusel.cuenta_habiente.materno}}</h4>
+              <p class="card-text">Genero: {{cuenta_habiente.genero ||carrusel.cuenta_habiente.genero}} </p>
+              <p class="card-text">Fecha de Nacimiento:{{cuenta_habiente.f_nacimiento || carrusel.cuenta_habiente.f_nacimiento | date:'dd - MMM - yyyy'}}</p>
+              <p class="card-text">Curp:{{cuenta_habiente.curp || carrusel.cuenta_habiente.curp }}</p>
+            </div>
+          </div>
+
+          <form (ngSubmit)="onSubmit(forma)" #forma="ngForm">
+           
+            <div class="row">
+            
+
+              <div class="col-md-6 mb-3">
+                <label>Fecha de ingreso</label>
+                <input  [ngModel]="carrusel.f_ingreso| date:'yyyy-MM-ddTHH:mm'" (ngModelChange)="carrusel.f_ingreso = $event" #f_ingreso="ngModel" name="f_ingreso" type="datetime-local" class="form-control "  placeholder="Fecha de ingreso" required>
+                <div class="alert alert-warning" *ngIf="!f_ingreso.valid && f_ingreso.touched" >
+                  Es obligatorio
+                </div>
+             </div>
+            <div class="col-md-6 mb-3">
+              <label >Diagnostico</label>
+              <textarea [(ngModel)]="carrusel.diagnostico" #diagnostico="ngModel" name="diagnostico" type="text" class="form-control " placeholder="Diagnostico"  required></textarea>
+              <div class="alert alert-warning" *ngIf="!diagnostico.valid && diagnostico.touched" >
+                  El nombre es obligatorio
+              </div>
+            </div>
+            <div class="col-md-6 mb-3 form-check form-check-inline" >
+                <label class="form-check-label">
+                <input  type="radio" [(ngModel)]= "carrusel.completo" #completo="ngModel" name="completo" id="completo" [value]="true"> Completo
+                </label>
+                <label class="form-check-label">
+                <input  type="radio" [(ngModel)]= "carrusel.completo" #completo="ngModel" name="completo" id="completo" [value]="false"> No completado
+                </label>
+          </div>
+            <div class="col-md-6 mb-3">
+              <label >Estatus Carrusel</label>
+              <select class="form-control" [(ngModel)]= "carrusel.estatus_carrusel" #estatus_carrusel="ngModel"  name="estatus_carrusel" required>
+                <option value="Espera">En espera</option>
+                <option value="Activo">Activo</option>
+                <option value="Egresado">Egresado</option>
+              </select>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label>Fecha de estatus</label>
+              <input  [ngModel]="carrusel.f_estatus | date:'yyyy-MM-dd'" (ngModelChange)="carrusel.f_estatus = $event" #f_estatus="ngModel" name="f_estatus" type="date" class="form-control" value="" placeholder="Fecha de estatus" required>
+              <div class="alert alert-warning" *ngIf="!f_estatus.valid && f_estatus.touched" >
+                Es obligatorio
+              </div>
+           </div>
+            <div class="col-md-6 mb-3">
+              <label>Cama</label>
+              <input [(ngModel)]="carrusel.cama" #cama="ngModel" name="cama" type="text" class="form-control " placeholder="Cama"  required>
+              <div class="alert alert-warning" *ngIf="!cama.valid && cama.touched" >
+                  Es obligatorio
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label >Anotaciones</label>
+              <textarea [(ngModel)]="carrusel.anotaciones" #anotaciones="ngModel" name="anotaciones" type="text" class="form-control " placeholder="Anotaciones"  required></textarea>
+              <div class="alert alert-warning" *ngIf="!anotaciones.valid && anotaciones.touched" >
+                  El nombre es obligatorio
+              </div>
+            </div>
+            
+              <div class="col-md-6 mb-3">
+                <label >Servicios</label>
+                <select class="form-control" [(ngModel)]= "carrusel.servicio" #servicio="ngModel"  name="servicio" required>
+                  <option value=”” disabled  selected>Seleccionar Servicio</option>
+                  <option *ngFor="let servicio of servicios" value="{{servicio.nombre}}">{{servicio.nombre}}</option>
+                </select>
+                <div class="alert alert-warning" *ngIf="!servicio.valid && servicio.touched" >
+                    Es obligatorio
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label>Fecha de egreso</label>
+                <input  [ngModel]="carrusel.f_egreso| date:'yyyy-MM-dd'" (ngModelChange)="carrusel.f_egreso = $event" #f_egreso="ngModel" name="f_egreso" type="date" class="form-control "  placeholder="Fecha de egreso">
+                <div class="alert alert-warning" *ngIf="!f_egreso.valid && f_egreso.touched" >
+                  Es obligatorio
+                </div>
+             </div>
+            
+
+            
+            <input type="submit"  [disabled]="!forma.valid" value="{{title}}" class="btn btn-outline-primary btn-block" type="submit"/>
+            </div>
+            </form>
+            </div>

@@ -1,0 +1,35 @@
+<div class="col-lg-6">
+    <h3>{{title}}</h3>
+  
+    <div class="alert alert-success" *ngIf="status == 'success'">
+        Login correcto
+      </div>
+      <div class="alert alert-danger" *ngIf="status == 'error'">
+        No te has identificado correctamente>
+      </div>
+    
+      <form (ngSubmit)="loginForm()" #Forma="ngForm">
+          <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">Matricula:</span>
+              <input [(ngModel)]="usuario._id" name="matricula" #matricula="ngModel" type="text" class="form-control" placeholder="Matricula"  required>
+              <div class="alert alert-warning" *ngIf='!matricula.valid && matricula.touched'>
+                  La matricula es oblogatoria
+                </div>
+            </div> <br>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">Password:</span>
+                <input [(ngModel)]="usuario.password" name="password" #password="ngModel" type="password" class="form-control" placeholder="password" required>
+                <div  class="alert alert-warning" *ngIf='!password.valid && password.touched'>
+                    El password es obligatorio
+                </div>
+              </div> <br>
+        
+    
+        <input [disabled]="!Forma.valid" type="submit" value="Acceso" class="btn btn-outline-success btn-block"/>
+      </form>
+      
+  </div>
+
+
+
+    

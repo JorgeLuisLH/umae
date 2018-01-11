@@ -1,0 +1,79 @@
+<nav class="navbar navbar-expand-lg navbar-dark " style="background-color: rgb(33, 175, 25);">
+    <a class="navbar-brand" href="#">
+        <img src="/assets/img/logoimss.png" width="40" height="40" alt="" class="d-inline-block align-top"> Lomas Verdes
+      </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['home']">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['inventario-panel']">Informatica</a>
+      </li>
+      <li class="nav-item dropdown" routerLinkActive="active">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          APP Medicas
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" [routerLink]="[ 'cuenta-habientes']">Pacientes</a>
+          <a class="dropdown-item" [routerLink]="[ 'carruseles']">Carrusel</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    
+    <ul class="nav navbar-nav navbar-right" *ngIf="!identity">
+				<li>
+					<a [routerLink]="['/registro']" [routerLinkActive]="['active']">
+					<span class="glyphicon glyphicon-user"></span>
+					Registro
+					</a>
+				</li>
+				<li>
+					<a [routerLink]="['/login']" [routerLinkActive]="['active']">
+					<span class="glyphicon glyphicon-log-in"></span>
+					Login
+					</a>
+				</li>
+				
+      </ul>
+      <ul class="nav navbar-nav navbar-right" *ngIf="identity">
+          <li class="dropdown">
+            <a class="dropdown-toggle text-white" data-toggle="dropdown" href="#">
+              {{identity.nombre + ' ' + identity.paterno }} <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li *ngIf="identity && identity.perfil =='ROLE_ADMIN'">
+                <a [routerLink]="['/admin-panel']">
+                  <span class="glyphicon glyphicon-tasks"></span>
+                Administracion</a>
+                
+  
+              </li>
+              <li>
+                <a [routerLink]="['mis-datos']">
+                  <span class="glyphicon glyphicon-cog"></span>
+                Mis datos</a>
+              </li>
+              <li>
+                <a class="pointer" (click)="logout()">
+                <span class="glyphicon glyphicon-log-out"></span>
+              Salir
+                </a>
+              </li>
+  
+              
+            </ul>
+          </li>
+          
+        </ul>
+  </div>
+</nav>

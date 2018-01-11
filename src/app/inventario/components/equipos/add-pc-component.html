@@ -1,0 +1,151 @@
+<div class="col-lg-12">
+    <h1>{{title}}</h1>
+    <div class="alert alert-success" *ngIf="status == 'success'">
+      Equipo correctamente, <a [routerLink]="['/equipo']"> Ver aqui</a>
+    </div>
+    <div class="alert alert-danger" *ngIf="status == 'error'">
+      No se agrego correctamente
+    </div>
+    
+    <form (ngSubmit)="onSubmit(forma)" #forma="ngForm">
+    <div class="row">
+    <div class="col-6 col-md-4">
+        <label>Numero de Serie</label>
+        <input [(ngModel)]="equipo._id" name="_id" #_id="ngModel" type="text" class="form-control"  placeholder="Numero de Serie" required>
+        <div class="alert alert-warning" *ngIf="!_id.valid && _id.touched" >
+            El numero de serie
+        </div>
+      </div>
+    <div class="col-6 col-md-4">
+      <label >Alias</label>
+      <input [(ngModel)]="equipo.alias" #alias="ngModel" name="alias" type="text" class="form-control " placeholder="Alias"  required>
+      <div class="alert alert-warning" *ngIf="!alias.valid && alias.touched" >
+          El alias
+      </div>
+    </div>
+    <div class="col-6 col-md-4">
+      <label>Numero de Inventario Nacional</label>
+      <input [(ngModel)]="equipo.nni" #nni="ngModel" name="nni" type="text" class="form-control " placeholder="Numero de Inventario Nacional"  required>
+      <div class="alert alert-warning" *ngIf="!nni.valid && nni.touched" >
+          Es obligatorio
+      </div>
+    </div>
+    <div class="col-6 col-md-4">
+      <label >Inventario Nacional</label>
+      <input [(ngModel)]="equipo.inventario" #inventario="ngModel" name="inventario" type="text" class="form-control "  placeholder="Inventario de la Unidad" required>
+      <div class="alert alert-warning" *ngIf="!inventario.valid && inventario.touched" >
+          Es obligatorio
+      </div>
+    </div>
+    <div class="col-6 col-md-4">
+        <label >Tipo de equipo</label>
+        <select class="form-control" [(ngModel)]= "equipo.tipo_equipo" #tipo_equipo="ngModel"  name="tipo_equipo" required>
+          <option value=”” disabled selected>Seleccionar el tipo de Equipo</option>
+          <option value="PC">PC</option>
+          <option value="LAPTOP">LAPTOP</option>
+          <option value="IMPRESORA">IMPRESORA</option>
+          <option value="IMPRESORA MULTIFUNCIONAL">IMPRESORA MULTIFUNCIONAL</option>
+          <option value="SWITCH">SWHITCH</option>
+          <option value="SERVIDOR">SERVIDOR</option>
+          <option value="TELEFONO ANALOGO">TELEFONO ANALOGO</option>
+          <option value="TELEFONO IP">TELEFONO IP</option>
+          <option value="ROUTER">ROUTER</option>
+        </select>
+        <div class="alert alert-warning" *ngIf="!tipo_equipo.valid && tipo_equipo.touched" >
+            Es obligatorio
+        </div>
+      </div>
+      <div class="col-6 col-md-4">
+        <label ></label>
+        <select class="form-control" (change)="onChange($event.target.value)" [(ngModel)]= "equipo.marca" #marca="ngModel"  name="marca" required>
+          <option value=”” disabled  selected>Seleccionar la marca</option>
+          <option [ngValue]="marca.marca" *ngFor="let marca of marcas" >{{marca.marca}}</option>
+         
+        </select>
+        <div class="alert alert-warning" *ngIf="!marca.valid && marca.touched" >
+            Es obligatorio
+        </div>
+      </div>
+      <div class="col-6 col-md-4">
+        <label >Modelo</label>
+        <select class="form-control" [(ngModel)]= "equipo.modelo" #modelo="ngModel"  name="modelo" required>
+          <option value=”0” disabled  selected>Seleccionar el Modelo</option>
+          <option [ngValue]="modelo.modelo" *ngFor="let modelo of modelos"  >{{modelo.modelo}}</option>
+         
+        </select>
+        <div class="alert alert-warning" *ngIf="!modelo.valid && modelo.touched" >
+            Es obligatorio
+        </div>
+      </div>
+      <div class="col-6 col-md-4">
+        <label >Piso</label>
+        <select class="form-control" [(ngModel)]= "equipo.piso" #piso="ngModel"  name="piso" required>
+          <option value=”” disabled  selected>Seleccionar el Piso</option>
+          <option value="PB">PB</option>
+          <option value="1">1</option>
+         
+        </select>
+        <div class="alert alert-warning" *ngIf="!piso.valid && piso.touched" >
+            Es obligatorio
+        </div>
+      </div>
+      <div class="col-6 col-md-4">
+        <label >Ubicacion</label>
+        <select class="form-control" [(ngModel)]= "equipo.ubicacion" #ubicacion="ngModel"  name="ubicacion" required>
+          <option value=”” disabled  selected>Seleccionar la ubicacion</option>
+          <option value="TITULAR">TITULAR</option>
+          
+        </select>
+        <div class="alert alert-warning" *ngIf="!ubicacion.valid && ubicacion.touched" >
+            Es obligatorio
+        </div>
+      </div>
+    
+    
+    <div class="col-6 col-md-4">
+      <label>MAC</label>
+      <input [(ngModel)]="equipo.mac"  #mac="ngModel" name="mac" type="text" class="form-control "  placeholder="MAC">
+    </div>
+    <div class="col-6 col-md-4">
+        <label>IP</label>
+        <input [(ngModel)]="equipo.ip" #ip="ngModel" name="ip" type="text" class="form-control "  placeholder="IP">
+      </div>
+      <div class="col-6 col-md-4" *ngIf="tipo_equipo.value == 'PC' || tipo_equipo.value == 'LAPTOP' || tipo_equipo.value == 'SERVIDOR'">
+        <label>Procesador</label>
+        <input [(ngModel)]="equipo.procesador" name="procesador" type="text" class="form-control "  placeholder="Procesador">
+      </div>
+
+      <div class="col-6 col-md-4"  *ngIf="tipo_equipo.value == 'PC' || tipo_equipo.value == 'LAPTOP' || tipo_equipo.value == 'SERVIDOR'">
+        <label>Disco Duro</label>
+        <input [(ngModel)]="equipo.dd" name="dd" type="text" class="form-control "  placeholder="Disco Duro">
+      </div>
+      <div class="col-6 col-md-4" *ngIf="tipo_equipo.value == 'PC' || tipo_equipo.value == 'LAPTOP' || tipo_equipo.value == 'SERVIDOR'">
+        <label>Memoria Ram</label>
+        <input [(ngModel)]="equipo.ram" name="ram" type="text" class="form-control "  placeholder="Ram">
+      </div>
+      <div class="col-6 col-md-4">
+        <label>Observaciones</label>
+        <textarea [(ngModel)]="equipo.observaciones" name="observaciones" type="text" class="form-control "  placeholder="Observaciones"> </textarea>
+      </div>
+
+      <div class="col-6 col-md-4 form-check form-check-inline" >
+        <label>Estado</label>
+        <label class="form-check-label"> Activo
+        <input  type="radio" [(ngModel)]= "equipo.activo" #activo="ngModel" name="activo" id="completo" [value]="true">
+        </label>
+        <label class="form-check-label"> Inactivo
+        <input  type="radio" [(ngModel)]= "equipo.activo" #activo="ngModel" name="activo" id="completo" [value]="false">
+        </label>
+  </div>
+    <div class="col-6 col-md-4">
+        <label>Fecha de Registro</label>
+        <input  [ngModel]="equipo.fecha | date:'yyyy-MM-dd'" (ngModelChange)="equipo.fecha = $event" #fecha="ngModel" name="f_nacimiento" type="date" class="form-control " value=""  placeholder="Fecha de nacimiento" required>
+        <div class="alert alert-warning" *ngIf="!fecha.valid && fecha.touched" >
+          Es obligatorio
+      </div>
+    
+    </div>
+    </div>
+    <br>
+    <input  [disabled]="!forma.valid" class="btn btn-outline-primary btn-block" type="submit" value="{{title}}"/>
+    </form>

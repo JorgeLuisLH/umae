@@ -1,0 +1,90 @@
+<div class="col-lg-12">
+    <h3>{{title}}</h3>
+  
+    <div class="row">
+      <div class="col-lg-1">Buscar</div>
+      <div class="col-lg-3">
+        <input type="text" [(ngModel)]="busqueda"  minlength="11" maxlength="11"/>
+      </div>
+  
+      <div class="lead  label-success" *ngIf="busqueda">
+          Termino de busqueda:<strong>{{busqueda}}</strong>
+          <br><a [routerLink]="['/cuenta-habiente']" class="btn btn-outline-primary">
+            Registrar Cuenta Habiente
+          </a>
+        </div>
+    </div><br>
+    <div class="row">
+    <div class="col-6 col-md-4" *ngFor="let cuenta_habiente of cuenta_habientes | search: busqueda">
+
+        
+         <div class="card text-white bg-primary mb-2" style="max-width: 21rem;">
+            <a href="#verModal-{{cuenta_habiente._id}}" class="card-header text-white" data-toggle="modal" >{{cuenta_habiente._id}}</a>
+            <div class="card-body">
+              <h4 class="card-title">{{cuenta_habiente.nombre}} {{cuenta_habiente.paterno}} {{cuenta_habiente.materno}}</h4>
+                <a  href="#myModal-{{cuenta_habiente._id}}" role="button" data-toggle="modal" class="btn btn-sm btn-danger">
+                  <span class="glyphicon glyphicon-trash"></span>
+                  Borrar
+                </a>  
+                <a [routerLink]="['/addcarrusel', cuenta_habiente._id]" class="btn btn-sm btn-success">
+                  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                  Agregar Carrusel
+                </a>
+            </div>
+          </div>
+        
+
+
+<!-- Modal -->
+<div class="modal fade" id="verModal-{{cuenta_habiente._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{cuenta_habiente._id}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>{{cuenta_habiente.nombre}} {{cuenta_habiente.paterno}} {{cuenta_habiente.materno}}</p>
+          <p>{{cuenta_habiente.genero}}</p>
+          <p>{{cuenta_habiente.f_nacimiento | date:'dd - MMM - yyyy'}}</p>
+          <p>{{cuenta_habiente.curp}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <a [routerLink]="['/cuenta-habiente/editar', cuenta_habiente._id]" class="btn btn-primary" data-dismiss="modal">
+            Editar
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<!-- Modal -->
+        <div id="myModal-{{cuenta_habiente._id}}" class="modal fade">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title">Estas seguro?</h4>
+                </div>
+                <div class="modal-body">
+                  <p>Seguro que quiere al Cuenta habiente? <strong>{{cuenta_habiente._id}}</strong>?</p>
+                  <p class="text-warning"><small>Si borra este Cuenta Habiente no podras recuperarlo</small></p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                  <button type="button" class="btn btn-danger" (click)="deleteAnimal(cuenta_habiente._id)">Borrar</button>
+                </div>
+              </div>
+            </div>
+            </div>
+    </div>
+
+
+</div>
+
+</div>
